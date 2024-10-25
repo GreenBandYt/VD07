@@ -1,12 +1,20 @@
-from flask import Flask
+from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '1234'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db' # Эта строчка нужна, чтобы мы могли подключиться к базе данных
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Эта строчка отключает сигнализацию об изменении объектов внутри базы данных
 
-db = SQLAlchemy(app) # Создание объекта, через который мы будем работать с базой данных
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db' # Эта строчка нужна, чтобы мы могли подключиться к базе данных
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Эта строчка отключает сигнализацию об изменении объектов внутри базы данных
+
+# db = SQLAlchemy(app) # Создание объекта, через который мы будем работать с базой данных
+
 
 class User(db.Model): # В скобках указываем модель, чтобы в дальнейшем создать именно базу данных
     id = db.Column(db.Integer, primary_key=True)
